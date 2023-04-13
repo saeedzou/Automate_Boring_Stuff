@@ -12,22 +12,25 @@ def login(username, password):
     }
     # send a post request to "https://net2.sharif.edu/login" with payload
     response = session.post("https://net2.sharif.edu/login", data=payload)
+    # check the status code of the response
+    if response.status_code != 200:
+        return None
     # return the session
     return session
 
 # define main function
 def main():
     # define username and password
-    username = "Enter your username"
-    password = "Enter your password here"
+    username = "enter your user"
+    password = "enter your password"
     # call login function
     session = login(username, password)
     # print whether the login was successful or not
-    print("Login was successful" if session else "Login was not successful")
+    if session:
+        print("Login was successful")
+    else:
+        print("Login was not successful")
 
     
 # call main function
 main()
-
-
-
