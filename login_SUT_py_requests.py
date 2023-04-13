@@ -1,5 +1,5 @@
-# import requests library
 import requests
+import argparse
 
 # write a function to login to "https://net2.sharif.edu/login" using post method
 def login(username, password):
@@ -20,12 +20,16 @@ def login(username, password):
 
 # define main function
 def main():
-    # define username and password
-    username = "enter your user"
-    password = "enter your password"
+    # create an ArgumentParser object
+    parser = argparse.ArgumentParser(description="Login to Sharif University Net2")
+    # add arguments for username and password
+    parser.add_argument("--username", help="username for login", required=True)
+    parser.add_argument("--password", help="password for login", required=True)
+    # parse the command-line arguments
+    args = parser.parse_args()
     # call login function
-    session = login(username, password)
-    # print whether the login was successful or not
+    session = login(args.username, args.password)
+    # check the returned session
     if session:
         print("Login was successful")
     else:
@@ -33,4 +37,5 @@ def main():
 
     
 # call main function
-main()
+if __name__ == "__main__":
+    main()
