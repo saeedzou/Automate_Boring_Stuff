@@ -12,16 +12,44 @@ To run a program just run it as a python file.
 ```text
 selenium
 requests
-notify_run
-notifypy
+playsound
 ```
 
 ## Contents
 
 ### [login_SUT_py_requests.bat](https://github.com/saeedzou/Automate_Boring_Stuff/blob/master/login_SUT_py_requests.bat)
 
-This program logs into the SUT login network page using python requests. It uses the requests module to send a POST request to the login page. To execute this program download [login_SUT_py_requests.bat](https://github.com/saeedzou/Automate_Boring_Stuff/blob/master/login_SUT_py_requests.bat) and [login_SUT_py_requests.py](https://github.com/saeedzou/Automate_Boring_Stuff/blob/master/login_SUT_py_requests.py) and run the batch file.
-You should also change the username and password in the python file, and the path to the python file in the batch file.
+- Logs into the SUT login network page using python requests. To run this script automatically, you can use Windows Task Scheduler to run the batch file on event triggers. 
+
+Follow these steps:
+1. Change the USERNAME and PASSWORD command-line arguments in the batch file to your credentials.
+2. Change the path to the python folder path in the batch file.
+3. Create a new task in Task Scheduler.
+4. In the General tab, give the task a name and description.
+5. In the Triggers tab, click on New and select "On an event".
+6. Choose Custom and select "Edit Event Filter"
+7. In the XML tab, select "edit query manually" and confirm if a popup appears.
+8. Paste the following code in the XML tab and click OK. (You can change the network ssids or add more)
+```xml
+<QueryList>
+  <Query Id="0" Path="System">
+    <Select Path="Microsoft-Windows-NetworkProfile/Operational">
+*[System[(EventID=10000)]] and (
+*[EventData[(Data[@Name="Name"]="Sharif-WiFi")]] or
+*[EventData[(Data[@Name="Name"]="Sharif-WiFi 2")]] or
+*[EventData[(Data[@Name="Name"]="EE-WLANN")]]
+)
+</Select>
+  </Query>
+</QueryList>
+```
+9. Click OK and OK again.
+10. In the Actions tab, click on New and select "Start a program".
+11. In the Program/script field, enter the path to the batch file.
+12. Click OK and OK again.
+13. On the Conditions tab, you can uncheck the "Start the task only if the computer is on AC power" checkbox.
+
+
 
 ### [login_SUT_selenium.py](https://github.com/saeedzou/Automate_Boring_Stuff/blob/master/login_SUT_selenium.py)
 
