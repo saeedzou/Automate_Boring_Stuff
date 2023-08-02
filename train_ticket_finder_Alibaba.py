@@ -15,22 +15,24 @@ def play_sound(sound_file):
 def check_date(date, price_ub, price_lb):
     if date < 10:
         date = f"0{date}"
-    url = f"https://www.alibaba.ir/train/THR-MHD?adult=1&child=0&infant=0&departing=1402-05-{date}&ticketType=Family&isExclusive=false"
+    url = f"https://www.alibaba.ir/train/THR-MHD?adult=1&child=0&infant=0"
+    f"&departing=1402-05-{date}&ticketType=Family&isExclusive=false"
     driver.get(url)
     time.sleep(5)
-    available_tickets = driver.find_elements(by=By.CLASS_NAME, value='text-secondary-400')
+    available_tickets = driver.find_elements(by=By.CLASS_NAME, 
+                                             value='text-secondary-400')
     for available_ticket in available_tickets:
         price = int(''.join(available_ticket.text.split(',')))
         t = time.localtime()
         print(
-            f"{t.tm_year}-{t.tm_mon}-{t.tm_mday} {t.tm_hour}:{t.tm_min}:{t.tm_sec} | "
+            f"{t.tm_hour}:{t.tm_min}:{t.tm_sec} | "
             f"Ticket on 1401-06-{date} price:{price / 10000}k Tomans")
         if price_ub * 10000 > price > price_lb * 10000:
             play_sound('alarm.mp3')
             time.sleep(3)
 
 # Check every 1 minutes
-def ticket_checker(dates, price_ub=400, price_lb=200):
+def ticket_checker(dates, price_ub=450, price_lb=300):
     while True:
         for date in dates:
             check_date(date, price_ub, price_lb)
