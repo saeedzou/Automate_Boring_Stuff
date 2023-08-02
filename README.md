@@ -17,7 +17,7 @@ playsound
 
 ## Contents
 
-### [login_SUT_py_requests.bat](https://github.com/saeedzou/Automate_Boring_Stuff/blob/master/login_SUT_py_requests.bat)
+### [login_SUT_py_requests.bat](https://github.com/saeedzou/Automate_Boring_Stuff/blob/master/WiFi-Login/login_SUT_py_requests.bat)
 
 - Logs into the SUT login network page using python requests. To run this script automatically, you can use Windows Task Scheduler to run the batch file on event triggers. 
 
@@ -51,13 +51,13 @@ Follow these steps:
 
 
 
-### [login_SUT_selenium.py](https://github.com/saeedzou/Automate_Boring_Stuff/blob/master/login_SUT_selenium.py)
+### [login_SUT_selenium.py](https://github.com/saeedzou/Automate_Boring_Stuff/blob/master/WiFi-Login/login_SUT_selenium.py)
 
 This automates login-based networks that require credentials to be used.
 Update the USERNAME and PASSWORD variables in the file to your credentials.
 This is implemented using selenium.
 
-### [Train Ticket Checker](https://github.com/saeedzou/Automate_Boring_Stuff/blob/master/train_ticket_finder_Alibaba.py)
+### [Train Ticket Checker](https://github.com/saeedzou/Automate_Boring_Stuff/blob/master/Train-Ticket-Finder-Alibaba/train_ticket_finder_Alibaba.py)
 
 This is a program I wrote to check for available train tickets in a price range.
 It is not scalable and you're gonna have to do some updates to the url paths if you need it to work.
