@@ -26,7 +26,7 @@ def ticket_checker(dates, price_ub=300, price_lb=400):  # dates is a list of day
                     # play alarm.mp3
                     playsound.playsound('alarm.mp3')
 
-        time.sleep(60)
+        time.sleep(10)
 
 
 if __name__ == "__main__":
