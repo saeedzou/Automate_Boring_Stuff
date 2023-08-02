@@ -5,15 +5,15 @@ import playsound
 
 
 # Check every 10 minutes
-def ticket_checker(dates):  # dates is a list of days in the month to check
+def ticket_checker(dates, price_ub=300, price_lb=400):  # dates is a list of days in the month to check
     found = False
-    # notify.register()  # Uncomment this line if you want to register to a new channel
     try:
         while not found:
             for date in dates:
-                driver.get(
-                    f"https://www.alibaba.ir/train/THR-MHD?adult=1&child=0&infant=0&departing=1401-12-{date}&ticketType"
-                    f"=Family&isExclusive=false")
+                if date < 10:
+                    date = f"0{date}"
+                url = f"https://www.alibaba.ir/train/THR-MHD?adult=1&child=0&infant=0&departing=1402-05-{date}&ticketType=Family&isExclusive=false"
+                driver.get(url)
                 time.sleep(5)
                 available_tickets = driver.find_elements(by=By.CLASS_NAME, value='text-secondary-400')
                 for available_ticket in available_tickets:
@@ -22,7 +22,7 @@ def ticket_checker(dates):  # dates is a list of days in the month to check
                     print(
                         f"{t.tm_year}-{t.tm_mon}-{t.tm_mday} {t.tm_hour}:{t.tm_min}:{t.tm_sec} | "
                         f"Ticket on 1401-06-{date} price:{price / 10000}k Tomans")
-                    if 3500000 > price > 2300000:
+                    if price_ub > price / 10000 > price_lb:
                         time.sleep(17)
                         # Comment here
                         # play alarm.mp3
